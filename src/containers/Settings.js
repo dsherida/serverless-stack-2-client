@@ -4,6 +4,8 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 import BillingForm from "../components/BillingForm";
 import config from "../config";
 import "./Settings.css";
+import { LinkContainer } from "react-router-bootstrap";
+import LoaderButton from "../components/LoaderButton";
 
 export default class Settings extends Component {
     constructor(props) {
@@ -44,15 +46,33 @@ export default class Settings extends Component {
 
     render() {
         return (
-            <div className="Settings">
-                <StripeProvider apiKey={config.STRIPE_KEY}>
-                    <Elements>
-                        <BillingForm
-                            loading={this.state.isLoading}
-                            onSubmit={this.handleFormSubmit}
+            <div>
+                <div className="Settings">
+                    <LinkContainer to="/settings/email">
+                        <LoaderButton
+                            block
+                            bsSize="large"
+                            text="Change Email"
                         />
-                    </Elements>
-                </StripeProvider>
+                    </LinkContainer>
+                    <LinkContainer to="/settings/password">
+                        <LoaderButton
+                            block
+                            bsSize="large"
+                            text="Change Password"
+                        />
+                    </LinkContainer>
+                </div>
+                <div className="Settings">
+                    <StripeProvider apiKey={config.STRIPE_KEY}>
+                        <Elements>
+                            <BillingForm
+                                loading={this.state.isLoading}
+                                onSubmit={this.handleFormSubmit}
+                            />
+                        </Elements>
+                    </StripeProvider>
+                </div>
             </div>
         );
     }
