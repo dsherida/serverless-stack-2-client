@@ -23,6 +23,9 @@
 [context.branch-deploy]
   command = "REACT_APP_STAGE=dev npm run build"
 
+[context.dev] # dev branch
+  command = "REACT_APP_STAGE=dev npm run build"
+
 # Always redirect any request to our index.html
 # and return the status code 200.
 [[redirects]]
